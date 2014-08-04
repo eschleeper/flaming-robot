@@ -5,13 +5,9 @@ ruby '2.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
 
-group :development do
-  gem 'mysql2'
-end
 
-group :production do
-  gem 'pg', '0.17.1'
-end
+gem 'mysql2', :group => :development
+gem "pg", :group => :production
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'

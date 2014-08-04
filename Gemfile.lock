@@ -228,7 +228,7 @@ DEPENDENCIES
   mini_magick
   multi_json (~> 1.10.1)
   mysql2
-  pg (= 0.17.1)
+  pg
   rails (= 4.1.4)
   rails-backbone
   sass-rails (~> 4.0.3)
