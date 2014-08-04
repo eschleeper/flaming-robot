@@ -24,11 +24,11 @@ class FieldGuide.Views.Sections.SectionView extends Backbone.View
     @guideItems = new FieldGuide.Views.GuideItems.IndexView(guideItems: @model.guide_items, section_id: @model.id, section_name: @model.get("name"))
     $(@el).append(@guideItems.render().$el)
     self = this;
-    #@guideItems.$el.imagesLoaded () ->
-    #  self.guideItems.msnry = new Masonry( self.guideItems.el, {
-    #    itemSelector: '.four.columns',
-    #    "gutterWidth": 2
-    #  });
+    @guideItems.$el.imagesLoaded () ->
+      self.guideItems.msnry = new Masonry( self.guideItems.el, {
+        itemSelector: '.four.columns',
+        "gutterWidth": 2
+      });
 
 
     return this
