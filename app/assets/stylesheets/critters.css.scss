@@ -1,0 +1,50 @@
+// Place all the styles related to the Critters controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#wiki_image_pages-list {
+  width:100%;
+  li.saving {
+    background:#ccc;
+  }
+  iframe {
+    height: 800px;
+  }
+}
+
+
+
+#sections-list {
+  float:left;
+  width:100%;
+  .columns.four {
+    float:left;
+  }
+  .guide_items_list {
+    .columns.four {
+      padding:0 5px;
+    }
+  }
+  h5 {
+    margin: 10px 0 5px;
+    word-wrap: break-word;
+    font-size: 15px;
+    font-size: 12px;
+  }
+  .attribution {
+    font-size: 8px;
+    word-wrap: break-word;
+    font-style: italic;
+    line-height: 8px;
+    margin: 0 0 10px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  #sections-list .columns.four {
+    width:100%!important;
+    .columns.four {
+      width: 33.33333%!important;;
+    }
+  }
+}

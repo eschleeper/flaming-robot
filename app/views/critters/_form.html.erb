@@ -1,0 +1,34 @@
+<%= form_for(@critter) do |f| %>
+  <% if @critter.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@critter.errors.count, "error") %> prohibited this critter from being saved:</h2>
+
+      <ul>
+      <% @critter.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :type %>
+  <%= f.label :name %>
+  <div class="row">
+    <div class="twelve columns">
+      <div class="row collapse">
+        <div class="six mobile-three columns">
+          <%= f.text_field :name %>
+        </div>
+        <div class="three mobile-three columns">
+          <label for="radio_bird"><input name="type" type="radio" id="radio_bird">Bird</label>
+          <label for="radio_bug"><input name="type" type="radio" id="radio_bug">Bug</label>
+          <label for="radio_herp"><input name="type" type="radio" id="radio_herp">Reptiles and Amphibians</label>
+        </div>
+        <div class="three mobile-one columns">
+          <%= f.submit 'Save', :class => 'button expand postfix' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+

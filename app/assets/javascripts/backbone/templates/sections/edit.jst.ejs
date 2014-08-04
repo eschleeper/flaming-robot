@@ -1,0 +1,23 @@
+<h1>Edit section</h1>
+
+<form id="edit-section" name="section">
+  <input type="hidden" name="guide_id" id="guide_id" value="<%= guide_id %>" >
+  
+  
+  <label for="name">Name:</label>
+  <div class="row">
+    <div class="twelve columns">
+      <div class="row collapse">
+        <div class="nine mobile-three columns">
+          <input type="text" name="name" id="name" value="<%= name %>" >
+        </div>
+        <div class="three mobile-one columns">
+          <input type="submit" value="Update Section" class="button expand postfix" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>
+
+<a href="#/index">Back</a>

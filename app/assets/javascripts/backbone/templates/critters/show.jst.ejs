@@ -1,0 +1,16 @@
+<div class="row">
+
+  <h3><%= name %></h3>
+
+  <% if (identifying_images.length > 0 && identifying_images[0].image.web_preview) { %>
+    <a href="<%= identifying_images[0].image.web_full.url %>">
+      <img src="<%= identifying_images[0].image.web_preview.url %>" />
+    </a>
+  
+    <% if (identifying_images[0].attribution) { %>
+      <p><%= identifying_images[0].attribution %></p>
+    <% } %>
+  
+  <% } %>
+
+</div>

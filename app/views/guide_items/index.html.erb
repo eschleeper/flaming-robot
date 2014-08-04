@@ -1,0 +1,29 @@
+<h1>Listing guide_items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Section</th>
+      <th>Critter</th>
+      <th>Secion index</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @guide_items.each do |guide_item| %>
+      <tr>
+        <td><%= guide_item.section_id %></td>
+        <td><%= guide_item.critter_id %></td>
+        <td><%= guide_item.secion_index %></td>
+        <td><%= link_to 'Show', guide_item %></td>
+        <td><%= link_to 'Edit', edit_guide_item_path(guide_item) %></td>
+        <td><%= link_to 'Destroy', guide_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Guide item', new_guide_item_path %>

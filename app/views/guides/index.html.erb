@@ -1,0 +1,38 @@
+<h1>Listing guides</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Explorer</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @guides.each do |guide| %>
+      <tr>
+        <td><%= guide.name %>
+          <ul>
+            <% for section in guide.sections %>
+              <li><%= section.name %></li>
+                <ul>
+                  <% for critter in section.critters %>
+                    <li><%= critter.name %></li>
+                  <% end %>
+                </ul>
+            <% end %>
+          </ul>
+        </td>
+        <td><%= guide.explorer_id %></td>
+        <td><%= link_to 'Show', guide %></td>
+        <td><%= link_to 'Edit', edit_guide_path(guide) %></td>
+        <td><%= link_to 'Destroy', guide, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Guide', new_guide_path %>

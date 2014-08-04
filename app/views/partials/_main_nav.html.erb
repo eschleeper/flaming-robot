@@ -1,0 +1,30 @@
+<!-- Entire Navbar Code -->
+<ul class="nav-bar">
+  <li class="<%= ap(root_path) %>"><%= link_to 'Home', root_path %></li>
+  <li class="<%= ap(critters_path) %> has-flyout">
+    <%= link_to 'Critters', critters_path %>
+    <a href="#" class="flyout-toggle"><span> </span></a>
+    <ul class="flyout">
+      <li class="<%= ap(birds_path) %>"><%= link_to 'Birds', birds_path %><%= link_to 'New Bird', new_bird_path %></li>
+      <li class="<%= ap(bugs_path) %>"><%= link_to 'Bugs', bugs_path %></li>
+      <li class="<%= ap(herps_path) %>"><%= link_to 'Reptiles and Amphibians', herps_path %></li>
+      <li class="<%= ap(insects_path) %>"><%= link_to 'Insects', insects_path %></li>
+      <li class="<%= ap(mammals_path) %>"><%= link_to 'Mammals', mammals_path %></li>
+    </ul>
+  </li>
+  <li class="has-flyout">
+    <a href="#">Nav Item 3</a>
+    <a href="#" class="flyout-toggle"><span> </span></a>
+    <div class="flyout">
+      <h5>Regular Dropdown</h5>
+      <div class="row">
+        <div class="six columns">
+          <p>This is example text. This is example text. This is example text. This is example text. This is example text. This is example text. This is example text. This is example text.</p>
+        </div>
+        <div class="six columns">
+          <p>This is example text. This is example text. This is example text. This is example text. This is example text. This is example text. This is example text. This is example text.</p>
+        </div>
+      </div>
+    </div>
+  </li>
+</ul>

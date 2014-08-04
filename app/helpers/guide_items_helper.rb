@@ -1,0 +1,2 @@
+module GuideItemsHelper
+end

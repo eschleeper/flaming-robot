@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Section:</strong>
+  <%= @guide_item.section_id %>
+</p>
+
+<p>
+  <strong>Critter:</strong>
+  <%= @guide_item.critter_id %>
+</p>
+
+<p>
+  <strong>Secion index:</strong>
+  <%= @guide_item.secion_index %>
+</p>
+
+<%= link_to 'Edit', edit_guide_item_path(@guide_item) %> |
+<%= link_to 'Back', guide_items_path %>

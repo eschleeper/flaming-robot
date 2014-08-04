@@ -1,0 +1,22 @@
+<form class="wiki_image_page three columns" action="/critters/<%= critter_id %>/identifying_images" method="POST">
+  <input type="hidden" name="critter_id" value="<%= critter_id %>" />
+  <div class="field">
+    <label for="title"> Title:</label>
+    <input type="text" name="critter_identifying_images[title]" value="<%= title %>" >
+  </div>
+
+  <div class="field">
+    <label for="attribution"> Attribution:</label>
+    <input type="text" name="attribution" value="<%= attribution %>" >
+  </div>
+
+  <div class="field">
+    <label for="url"> Url:</label>
+    <input type="text" name="remote_image_url" value="<%= remote_image_url %>" >
+  </div>
+
+  <div class="actions">
+    <input type="submit" value="Save Image" class="save button" />
+  </div>
+
+</form>

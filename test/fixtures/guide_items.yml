@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  section_id: 1
+  critter_id: 1
+  secion_index: 1
+
+two:
+  section_id: 1
+  critter_id: 1
+  secion_index: 1

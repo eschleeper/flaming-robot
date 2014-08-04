@@ -1,0 +1,41 @@
+<!doctype html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<!--[if IE 10]><html class="ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+  <head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FieldGuide</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="off-canvas hide-extras">
+
+<header>
+  <h1>FIELD GUIDE</h1>
+</header>
+
+<%= render "partials/main_nav" %>
+
+<div id="main-container" class="row">
+  <div class="twelve columns">
+  
+    <% if notice %>
+      <div class="alert-box"><%= notice %></div>
+    <% end %>
+    <% if alert %>
+      <div class="alert-box alert"><%= alert %></div>
+    <% end %>
+
+    <%= yield %>
+
+  </div>
+	
+</section>
+
+<script type='text/javascript'>
+  <%= yield :javascript %>
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<h1><%= @critter.name %></h1>
+
+<% if @images %>
+<ul>
+  <% for image in @images %>
+    <%= image_tag(image.image_url(:web_preview)) %>
+  <% end %>
+</ul>
+<% end %>
+
+<div id="wikiepedia_search_form"></div>
+
+<% content_for :javascript do %>
+
+  $(function() {
+    
+    var images = new FieldGuide.Collections.WikiImagePagesCollection([], { id: <%= @critter.id %> });
+    var imagesView = new FieldGuide.Views.WikiImagePages.IndexView({el:"#wikiepedia_search_form", collection: images});
+    window.router = new FieldGuide.Routers.WikiImagePagesRouter({wikiImagePages:images});
+    Backbone.history.start();
+    
+    $("#search_wikipedia").submit(function(e){
+      e.preventDefault();
+      images.fetch({reset: true, data:$(this).serialize()});
+    });
+    
+  });
+<% end %>
+
+<%= link_to 'Edit', edit_critter_path(@critter) %> |
+<%= link_to 'Back', critters_path %>

@@ -1,0 +1,14 @@
+<h1>Images for <%= @critter.name %></h1>
+
+<%= form_for(:critter_identifying_images) do |f| %>
+
+  <%= f.hidden_field :critter_id, :value => @critter.id %>
+  <%= f.file_field :image %>
+  <%= f.text_field :attribution %>
+  
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<%- end %>

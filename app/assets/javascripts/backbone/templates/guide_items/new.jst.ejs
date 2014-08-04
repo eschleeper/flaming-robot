@@ -1,0 +1,26 @@
+<h3>Add to <%= section_name %></h3>
+
+<form id="new-guide_item" name="guide_item">
+
+    <input type="hidden" name="section_id" value="<%= section_id %>" >
+    <input type="hidden" name="critter_id" class="critter_id" value="<%= critter_id %>" >
+    
+    <div class="ui-autocomplete-results"></div>
+
+  <label for="search_critter_id_<%= section_id %>">Search Critters</label>
+  <div class="row">
+    <div class="twelve columns">
+      <div class="row collapse">
+        <div class="nine mobile-three columns">
+          <input type="text" class="search_critter" name="search_critter" id="search_critter_id_<%= section_id %>" value="<%= critter_id %>" >
+        </div>
+        <div class="three mobile-one columns">
+          <input type="submit" value="Add Critter to  <%= section_name %>" class="button expand postfix" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>
+
+<a class="back" href="javascript:void(0)">Back</a>

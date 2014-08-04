@@ -1,0 +1,28 @@
+<%= form_for(@guide) do |f| %>
+  <% if @guide.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@guide.errors.count, "error") %> prohibited this guide from being saved:</h2>
+
+      <ul>
+      <% @guide.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.label :name %>
+  <div class="row">
+    <div class="six columns">
+      <div class="row collapse">
+        <div class="nine mobile-three columns">
+          <%= f.text_field :name %>
+        </div>
+        <div class="three mobile-one columns">
+          <%= f.submit 'Save', :class => 'button expand postfix' %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>

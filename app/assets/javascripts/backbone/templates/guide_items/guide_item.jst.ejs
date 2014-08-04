@@ -1,0 +1,12 @@
+<% if (typeof identifying_images !== "undefined" && identifying_images.length > 0 && identifying_images[0].image.web_preview) { %>
+  <a href="<%= identifying_images[0].image.web_full.url %>" class="popup">
+    <img src="<%= identifying_images[0].image.web_preview.url %>" width="200" height="200" />
+  </a>
+<% } %>
+  <h5><%= name %></h5>
+  
+<% if (typeof identifying_images !== "undefined" && identifying_images.length > 0 && identifying_images[0].attribution) { %>
+    <p class="attribution"><%= identifying_images[0].attribution %></p>
+<% } %>
+
+<a href="#/section/<%= section_id %>/guide_item/<%= id %>/destroy" class="destroy">Destroy</a></p>

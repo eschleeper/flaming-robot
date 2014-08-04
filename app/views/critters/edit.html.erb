@@ -1,0 +1,25 @@
+<h1>Editing critter</h1>
+
+<%= render 'form' %>
+
+<div id="wikiepedia_search_form"></div>
+
+<% content_for :javascript do %>
+
+  $(function() {
+    
+    var images = new FieldGuide.Collections.WikiImagePagesCollection([], { id: <%= @critter.id %> });
+    var imagesView = new FieldGuide.Views.WikiImagePages.IndexView({el:"#wikiepedia_search_form", collection: images});
+    window.router = new FieldGuide.Routers.WikiImagePagesRouter({wikiImagePages:images});
+    Backbone.history.start();
+    
+    $("#search_wikipedia").submit(function(e){
+      e.preventDefault();
+      images.fetch({reset: true, data:$(this).serialize()});
+    });
+    
+  });
+<% end %>
+
+<%= link_to 'Show', @critter %> |
+<%= link_to 'Back', critters_path %>

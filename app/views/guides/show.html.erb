@@ -1,0 +1,38 @@
+<h1><%= @guide.name %></h1>
+
+<div id="sections">
+  <% for section in @guide.sections %>
+    section here
+  <% end %>
+</div>
+
+<div id="modal-form" class="reveal-modal expand" style="display:none">
+  
+</div>
+
+
+<%= link_to 'Edit', edit_guide_path(@guide) %> |
+<%= link_to 'Back', guides_path %>
+
+
+<% content_for :javascript do %>
+
+  $(function() {
+    
+
+    // Blog is the app name
+    window.router = new FieldGuide.Routers.SectionsRouter({
+      sections: <%= @guide.sections.to_json(:only => [:name, :id, :guide_id], :include => {
+        :guide_items => {:only => :id,:include => {
+          :critter => { :only => [ :id, :name ],:include => {
+            :identifying_images => {:only => [:image, :attribution]}
+          }}
+        }}
+      }).html_safe -%>,
+      guide_id: <%= @guide.id %>
+    });
+    Backbone.history.start();
+    
+  });
+  
+<% end %>
