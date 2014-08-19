@@ -70,6 +70,6 @@ class GuideItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def guide_item_params
-      params.require(:guide_item).permit(:section_id, :critter_id, :secion_index)
+      params.require(:guide_item).permit(:section_id, :critter_id, :section_index)
     end
 end

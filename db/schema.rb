@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140802221906) do
+ActiveRecord::Schema.define(version: 20140819015028) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "birds", force: true do |t|
+    t.integer "code"
+  end
 
   create_table "critters", force: true do |t|
     t.string   "name"
+    t.string   "latin_name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "type"
@@ -64,6 +72,16 @@ ActiveRecord::Schema.define(version: 20140802221906) do
 
   create_table "plants", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "re_tweets", force: true do |t|
+    t.integer  "tweet_id",     limit: 8
+    t.string   "tweeter"
+    t.string   "tweet_text"
+    t.string   "retweet_text"
+    t.boolean  "did_retweet"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

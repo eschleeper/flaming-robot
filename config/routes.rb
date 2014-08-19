@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   
+  resources :re_tweets do
+    collection do
+      get 'search'
+    end
+  end
+
   resources :guides
 
   resources :critters do 

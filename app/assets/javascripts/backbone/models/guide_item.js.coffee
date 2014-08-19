@@ -4,7 +4,7 @@ class FieldGuide.Models.GuideItem extends Backbone.Model
   defaults:
     section_id: null
     critter_id: null
-    secion_index: null
+    section_index: null
   parse: (response) ->
     if response && response.critter
       ret_val = response.critter

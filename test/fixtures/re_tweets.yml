@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tweet_id: 1
+  tweeter: MyString
+  tweet_text: MyString
+  retweet_text: MyString
+  did_retweet: false
+
+two:
+  tweet_id: 1
+  tweeter: MyString
+  tweet_text: MyString
+  retweet_text: MyString
+  did_retweet: false

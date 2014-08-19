@@ -25,10 +25,10 @@ class FieldGuide.Views.Sections.SectionView extends Backbone.View
     $(@el).append(@guideItems.render().$el)
     self = this;
     @guideItems.$el.imagesLoaded () ->
-      self.guideItems.msnry = new Masonry( self.guideItems.el, {
-        itemSelector: '.four.columns',
-        "gutterWidth": 2
-      });
+      #self.guideItems.msnry = new Masonry( self.guideItems.el, {
+      #  itemSelector: '.four.columns',
+      #  "gutterWidth": 2
+      #});
 
 
     return this

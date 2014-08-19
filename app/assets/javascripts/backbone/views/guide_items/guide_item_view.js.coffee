@@ -7,8 +7,7 @@ class FieldGuide.Views.GuideItems.GuideItemView extends Backbone.View
     "click .destroy" : "destroy"
 
   tagName: "div"
-  
-  className: "four columns"
+ 
 
   destroy: () ->
     this.$el.remove()

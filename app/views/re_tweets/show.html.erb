@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Tweet:</strong>
+  <%= @re_tweet.tweet_id %>
+</p>
+
+<p>
+  <strong>Tweeter:</strong>
+  <%= @re_tweet.tweeter %>
+</p>
+
+<p>
+  <strong>Tweet text:</strong>
+  <%= @re_tweet.tweet_text %>
+</p>
+
+<p>
+  <strong>Retweet text:</strong>
+  <%= @re_tweet.retweet_text %>
+</p>
+
+<p>
+  <strong>Did retweet:</strong>
+  <%= @re_tweet.did_retweet %>
+</p>
+
+<%= link_to 'Edit', edit_re_tweet_path(@re_tweet) %> |
+<%= link_to 'Back', re_tweets_path %>

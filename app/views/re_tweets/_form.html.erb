@@ -1,0 +1,37 @@
+<%= form_for(@re_tweet) do |f| %>
+  <% if @re_tweet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@re_tweet.errors.count, "error") %> prohibited this re_tweet from being saved:</h2>
+
+      <ul>
+      <% @re_tweet.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :tweet_id %><br>
+    <%= f.number_field :tweet_id %>
+  </div>
+  <div class="field">
+    <%= f.label :tweeter %><br>
+    <%= f.text_field :tweeter %>
+  </div>
+  <div class="field">
+    <%= f.label :tweet_text %><br>
+    <%= f.text_field :tweet_text %>
+  </div>
+  <div class="field">
+    <%= f.label :retweet_text %><br>
+    <%= f.text_field :retweet_text %>
+  </div>
+  <div class="field">
+    <%= f.label :did_retweet %><br>
+    <%= f.check_box :did_retweet %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
