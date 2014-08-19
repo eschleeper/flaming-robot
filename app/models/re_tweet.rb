@@ -4,7 +4,17 @@ class ReTweet < ActiveRecord::Base
   before_create :yo_me
   
   def self.search_twitter
-    $twitter.search("#wheresmysushi OR #wheresmyburrito OR #wheresmyburger OR #wheresmycheeseburger OR #wheresmypizza -rt", :result_type => "recent", :lang => "en").take(10).each do |tweet|
+    
+    twitter = Twitter::REST::Client.new do |config|
+    
+      config.consumer_key = Rails.configuration.consumer_key
+      config.consumer_secret = Rails.configuration.consumer_secret
+      config.access_token = Rails.configuration.access_token
+      config.access_token_secret = Rails.configuration.access_token_secret
+      
+    end
+    
+    twitter.search("#wheresmysushi OR #wheresmyburrito OR #wheresmyburger OR #wheresmycheeseburger OR #wheresmypizza -rt", :result_type => "recent", :lang => "en").take(10).each do |tweet|
       thing = tweet.text.downcase.match(/#wheresmy([A-z]*)/)[1]
       puts "I got your #{thing} here: http://bitchwher.es/#/my/#{thing} RT @#{tweet.user.screen_name}: #{tweet.text}"
       self.create({
