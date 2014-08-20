@@ -21,7 +21,7 @@ class ReTweet < ActiveRecord::Base
   def send_retweet
     if !self.did_retweet
       $twitter.update(self.retweet_text)
-      self.update_column(:did_retweet => true)
+      self.update_column(:did_retweet, true)
     end
   end
   
