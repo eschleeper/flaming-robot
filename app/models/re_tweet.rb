@@ -6,7 +6,7 @@ class ReTweet < ActiveRecord::Base
   def self.search_twitter
     
     
-    $twitter.search("#wheresmysushi OR #wheresmyburrito OR #wheresmyburger OR #wheresmycheeseburger OR #wheresmypizza -rt", :result_type => "recent", :lang => "en").take(10).each do |tweet|
+    $twitter.search("#wheresmysushi OR #wheresmyburrito OR #wheresmyburger OR #wheresmycheeseburger OR #wheresmypizza -rt", :result_type => "recent").take(10).each do |tweet|
       thing = tweet.text.downcase.match(/#wheresmy([A-z]*)/)[1]
       self.create({
         :tweet_id => tweet.id,
