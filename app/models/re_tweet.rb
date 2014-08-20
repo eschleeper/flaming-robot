@@ -28,7 +28,7 @@ class ReTweet < ActiveRecord::Base
       http = Net::HTTP.new(uri.host, uri.port)
       
       request = Net::HTTP::Post.new(uri.request_uri)
-      request.set_form_data({"api_token" => ENV['yo_api_key'], "username" => ENV['yo_username'], "link" => "#{ENV['base_url']}#{Rails.application.routes.url_helpers.re_tweet_path(self)}"})
+      request.set_form_data({"api_token" => ENV['yo_api_key'], "username" => ENV['yo_username'], "link" => "#{ENV['base_url']}#{Rails.application.routes.url_helpers.re_tweet_path(self.id)}"})
       
       http.request(request)
     end
