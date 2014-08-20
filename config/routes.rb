@@ -4,6 +4,9 @@ Rails.application.routes.draw do
     collection do
       get 'search'
     end
+    member do
+      post 'send_retweet'
+    end
   end
 
   resources :guides

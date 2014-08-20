@@ -1,5 +1,5 @@
 class ReTweetsController < ApplicationController
-  before_action :set_re_tweet, only: [:show, :edit, :update, :destroy]
+  before_action :set_re_tweet, only: [:show, :edit, :update, :destroy, :send_retweet]
 
   # GET /re_tweets
   # GET /re_tweets.json
@@ -64,6 +64,10 @@ class ReTweetsController < ApplicationController
   def search
     ReTweet.search_twitter
     redirect_to action: "index"
+  end
+  
+  def send_retweet
+    @re_tweet.send_retweet
   end
 
   private

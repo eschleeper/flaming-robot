@@ -25,5 +25,13 @@
   <%= @re_tweet.did_retweet %>
 </p>
 
+<% if !@re_tweet.did_retweet %>
+  <%= form_for @re_tweet, :url => {:action => "send_retweet"} do |f| %>
+
+    <%= f.submit 'RETWEET!', :class => 'success button' %>
+    
+  <% end %>
+<% end %>
+
 <%= link_to 'Edit', edit_re_tweet_path(@re_tweet) %> |
 <%= link_to 'Back', re_tweets_path %>

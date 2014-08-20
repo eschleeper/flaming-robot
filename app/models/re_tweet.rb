@@ -18,6 +18,13 @@ class ReTweet < ActiveRecord::Base
     end
   end
   
+  def send_retweet
+    if !self.did_retweet
+      $twitter.update(self.retweet_text)
+      self.update_column(:did_retweet => true)
+    end
+  end
+  
   private
     def yo_me
       require "net/http"
