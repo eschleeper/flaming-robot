@@ -68,6 +68,7 @@ class ReTweetsController < ApplicationController
   
   def send_retweet
     @re_tweet.send_retweet
+    redirect_to @re_tweet, notice: 'Re tweet was successfully sent.'
   end
 
   private
