@@ -16,32 +16,54 @@ class ReTweet < ActiveRecord::Base
     
     twitter.search("#wheresmysushi OR #wheresmyburrito OR #wheresmyburger OR #wheresmycheeseburger OR #wheresmypizza -rt", :result_type => "recent", :lang => "en").take(10).each do |tweet|
       thing = tweet.text.downcase.match(/#wheresmy([A-z]*)/)[1]
-      puts "I got your #{thing} here: http://bitchwher.es/#/my/#{thing} RT @#{tweet.user.screen_name}: #{tweet.text}"
       self.create({
         :tweet_id => tweet.id,
         :tweeter => tweet.user.screen_name,
         :tweet_text => tweet.text,
-        :retweet_text => "I got your #{thing} here: http://bitchwher.es/#/my/#{thing} RT @#{tweet.user.screen_name}: #{tweet.text}",
+        :retweet_text => "#{self.message_choices(thing.downcase)}http://bitchwher.es/#/my/#{thing} RT @#{tweet.user.screen_name}: #{tweet.text}",
         :did_retweet => false
       })
     end
   end
   
   private
-    def self.yo_me
+    def yo_me
       require "net/http"
       require "uri"
       
       uri = URI.parse("http://api.justyo.co/yo/")
       
-      # Full control
       http = Net::HTTP.new(uri.host, uri.port)
       
       request = Net::HTTP::Post.new(uri.request_uri)
-      request.set_form_data({"api_token" => Rails.configuration.yo_api_key, "username" => Rails.configuration.yo_username})
-       
-      response = http.request(request)
-      puts response.inspect
+      request.set_form_data({"api_token" => Rails.configuration.yo_api_key, "username" => Rails.configuration.yo_username, "link" => "http://afternoon-wildwood-1475.herokuapp.com#{re_tweet_path(self)}"})
+      
+      http.request(request)
+    end
+    
+    def self.message_choices(thing)
+      messages = [
+        self.make_retweet_text(thing),
+        "I got your #{thing} here: ",
+        "Ask and you shall receive "
+      ].sample
+    end
+  
+    def self.make_retweet_text(thing)
+      case thing
+      when "cheeseburger"
+        return "Cheese borger, cheese borger, cheese borger! "
+      when "burger"
+        return "Mmmm burgers... "
+      when "burrito"
+        return "Tengo tu burrito aqui "
+      when "sushi"
+        return "Looking for some sushi? "
+      when "pizza"
+        return "I'm the moon, hitting your eye... "
+      else
+        return "I got your #{thing} here: "
+      end
     end
   
 end
