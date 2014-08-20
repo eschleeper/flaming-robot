@@ -12,7 +12,7 @@ class ReTweet < ActiveRecord::Base
         :tweet_id => tweet.id,
         :tweeter => tweet.user.screen_name,
         :tweet_text => tweet.text,
-        :retweet_text => "#{self.message_choices(thing.downcase)}http://bitchwher.es/#/my/#{thing} RT @#{tweet.user.screen_name}: #{tweet.text}",
+        :retweet_text => "#{self.message_choices(thing.downcase)}http://bitchwher.es/#/my/#{thing} RT @#{tweet.user.screen_name} #{tweet.text}",
         :did_retweet => false
       })
     end
