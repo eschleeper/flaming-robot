@@ -49,6 +49,8 @@ gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 
 gem 'twitter'
+gem 'oauth'
+#gem 'omniauth-twitter'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

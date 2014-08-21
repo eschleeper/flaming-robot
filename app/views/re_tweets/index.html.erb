@@ -8,6 +8,7 @@
       <th>Tweet text</th>
       <th>Retweet text</th>
       <th>Did retweet</th>
+      <th>Tweet as</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -20,6 +21,7 @@
         <td><%= re_tweet.tweet_text %></td>
         <td><%= re_tweet.retweet_text %></td>
         <td><%= re_tweet.did_retweet %></td>
+        <td><%= re_tweet.tweet_as %></td>
         <td><%= link_to 'Show', re_tweet %></td>
         <td><%= link_to 'Edit', edit_re_tweet_path(re_tweet) %></td>
         <td><%= link_to 'Destroy', re_tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>

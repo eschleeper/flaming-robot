@@ -6,26 +6,54 @@ class ReTweet < ActiveRecord::Base
   def self.search_twitter
     
     
-    $twitter.search("#wheresmysushi OR #wheresmyburrito OR #wheresmyburger OR #wheresmycheeseburger OR #wheresmypizza -rt", :result_type => "recent").take(10).each do |tweet|
-      thing = tweet.text.downcase.match(/#wheresmy([A-z]*)/)[1]
+    $twitter.search("#wheresmysushi OR #wheresmyburrito OR #wheresmyburger OR #wheresmycheeseburger OR #wheresmypizza OR #wheresmytaco OR #cheeseburger OR  #doublecheeseburger OR  #triplecheeseburger OR #fries -rt", :result_type => "recent").take(10).each do |tweet|
+      
+      tweet_as = ( tweet.text.include? "#wheresmy" ) ? 1 : 2
+      if tweet_as == 1
+        thing = tweet.text.downcase.match(/#wheresmy([A-z]*)/)[1]
+        retweet_text = "#{self.message_choices(thing.downcase)}http://bitchwher.es/#/my/#{thing} RT @#{tweet.user.screen_name} #{tweet.text}"
+      else
+        if tweet.text.include? "#fries"
+          retweet_text = "No fries! Chip! RT @#{tweet.user.screen_name} #{tweet.text}"
+        elsif tweet.text.include? "#triplecheeseburger"
+          retweet_text = "Cheeseborger, cheeseborger, cheeseborger! RT @#{tweet.user.screen_name} #{tweet.text}"
+        elsif tweet.text.include? "#doublecheeseburger"
+          retweet_text = "Cheeseborger, cheeseborger! RT @#{tweet.user.screen_name} #{tweet.text}"
+        else tweet.text.include? "#cheeseburger"
+          retweet_text = "Cheeseborger! RT @#{tweet.user.screen_name} #{tweet.text}"
+        end
+        
+      end
+      
       self.create({
         :tweet_id => tweet.id,
         :tweeter => tweet.user.screen_name,
         :tweet_text => tweet.text,
-        :retweet_text => "#{self.message_choices(thing.downcase)}http://bitchwher.es/#/my/#{thing} RT @#{tweet.user.screen_name} #{tweet.text}",
-        :did_retweet => false
+        :retweet_text => self.twitter_limit(retweet_text),
+        :did_retweet => false,
+        :tweet_as => tweet_as
       })
+      
     end
   end
   
   def send_retweet
     if !self.did_retweet
-      $twitter.update(self.retweet_text)
+      if self.tweet_as == 2
+        $cheeseborger_twitter.update(self.retweet_text)
+      else
+        $twitter.update(self.retweet_text)
+      end
       self.update_column(:did_retweet, true)
     end
   end
   
   private
+  
+    def self.twitter_limit(tweet)
+      return ActionController::Base.helpers.truncate(tweet, length: 140)
+    end
+    
     def yo_me
       require "net/http"
       require "uri"
