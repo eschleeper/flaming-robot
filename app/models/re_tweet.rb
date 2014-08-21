@@ -26,13 +26,13 @@ class ReTweet < ActiveRecord::Base
         thing = tweet.text.downcase.match(/#wheresmy([A-z]*)/)[1]
         retweet_text = "#{self.message_choices(thing.downcase)}http://bitchwher.es/#/my/#{thing} RT @#{tweet.user.screen_name} #{tweet.text}"
       else
-        if tweet.text.include? "#triplecheeseburger"
+        if tweet.text.downcase.include? "#triplecheeseburger"
           retweet_text = "Cheeseborger, cheeseborger, cheeseborger! RT @#{tweet.user.screen_name} #{tweet.text}"
-        elsif tweet.text.include? "#doublecheeseburger"
+        elsif tweet.text.downcase.include? "#doublecheeseburger"
           retweet_text = "Cheeseborger, cheeseborger! RT @#{tweet.user.screen_name} #{tweet.text}"
-        elsif tweet.text.include? "#coke"
+        elsif tweet.text.downcase.include? "#coke"
           retweet_text = "No Coke! Pepsi! RT @#{tweet.user.screen_name} #{tweet.text}"
-        elsif tweet.text.include? "#fries"
+        elsif tweet.text.downcase.include? "#fries"
           retweet_text = "No fries! Chip! RT @#{tweet.user.screen_name} #{tweet.text}"
         else
           retweet_text = "Cheeseborger! RT @#{tweet.user.screen_name} #{tweet.text}"
