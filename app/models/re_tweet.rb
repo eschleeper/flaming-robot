@@ -76,24 +76,13 @@ class ReTweet < ActiveRecord::Base
     def yo_me
       if self.tweet_as == 2
         
-        if self.tweeter == "Cheezborger"
-          $cheeseborger_twitter.retweet(self.tweet_id)
-        else
-          puts self.retweet_text
-          unless $cheeseborger_twitter.update(self.retweet_text.to_str)
-            require "net/http"
-            require "uri"
-            
-            uri = URI.parse("http://api.justyo.co/yo/")
-            
-            http = Net::HTTP.new(uri.host, uri.port)
-            
-            request = Net::HTTP::Post.new(uri.request_uri)
-            request.set_form_data({"api_token" => ENV['yo_api_key'], "username" => ENV['yo_username'], "link" => "#{ENV['base_url']}#{Rails.application.routes.url_helpers.re_tweet_path(:id => self.id)}"})
-            
-            http.request(request)
-            
+        if !self.did_retweet
+          if self.tweeter == "Cheezborger"
+            $cheeseborger_twitter.retweet(self.tweet_id)
+          else
+            self.retweet_text.to_str
           end
+          self.update_column(:did_retweet, true)
         end
         
       else
