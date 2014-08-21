@@ -51,7 +51,8 @@ class ReTweet < ActiveRecord::Base
   private
   
     def self.twitter_limit(tweet)
-      return ActionController::Base.helpers.truncate(tweet, length: 140)
+      return ActionController::Base.helpers.sanitize(tweet, :tags=>[]).truncate(140, :separator => " ").html_safe
+      #return ActionController::Base.helpers.truncate(tweet, length: 140)
     end
     
     def yo_me
