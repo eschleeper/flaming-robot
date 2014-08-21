@@ -80,7 +80,7 @@ class ReTweet < ActiveRecord::Base
           if self.tweeter == "Cheezborger"
             $cheeseborger_twitter.retweet(self.tweet_id)
           else
-            self.retweet_text.to_str
+            $cheeseborger_twitter.update(self.retweet_text.to_str)
           end
           self.update_column(:did_retweet, true)
         end
