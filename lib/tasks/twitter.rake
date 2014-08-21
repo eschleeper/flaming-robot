@@ -2,11 +2,12 @@ namespace :twitter do
   desc "search twitter"
   task search: :environment do
     ReTweet.search_twitter
+    ReTweet.search_billy_goat
   end
   
   desc "test cheeseborger"
-  task test_cheeseborger: :environment do
-    $cheeseborger_twitter.update("HAI!")
+  task search_billy_goat: :environment do
+    ReTweet.search_billy_goat
   end
   
   
