@@ -21,7 +21,7 @@ class ReTweet < ActiveRecord::Base
     
     $twitter.search("#wheresmysushi OR #wheresmyburrito OR #wheresmyburger OR #wheresmycheeseburger OR #wheresmypizza OR #wheresmytaco OR #cheeseburger OR  #doublecheeseburger OR  #triplecheeseburger OR #frenchfries OR #cocacola -rt", :result_type => "recent").take(30).each do |tweet|
       
-      tweet_as = ( tweet.text.include? "#wheresmy" ) ? 1 : 2
+      tweet_as = ( tweet.text.downcase.include? "#wheresmy" ) ? 1 : 2
       if tweet_as == 1
         thing = tweet.text.downcase.match(/#wheresmy([A-z]*)/)[1]
         retweet_text = "#{self.message_choices(thing.downcase)}http://bitchwher.es/#/my/#{thing} RT @#{tweet.user.screen_name} #{tweet.text}"
@@ -58,14 +58,25 @@ class ReTweet < ActiveRecord::Base
         if self.tweeter == "Cheezborger"
           $cheeseborger_twitter.retweet(self.tweet_id)
         else
-          $cheeseborger_twitter.update(self.retweet_text)
+          self.do_the_tweet
         end
       else
-        $twitter.update(self.retweet_text)
+        self.do_the_tweet
       end
       self.update_column(:did_retweet, true)
     end
   end
+    
+    def do_the_tweet
+      if self.tweet_as == 1
+        $twitter.update(self.retweet_text)
+      elsif self.tweet_as == 2
+        $cheeseborger_twitter.update(self.retweet_text)
+      else
+        $schleeper_twitter.update(self.retweet_text)
+      end
+      #puts "sending #{self.retweet_text}"
+    end
   
   private
   
@@ -168,9 +179,6 @@ class ReTweet < ActiveRecord::Base
     def self.maybe_hashtag(words)
       [
         words,
-        words,
-        
-        
         "##{words}"
       ].sample
     end
@@ -186,7 +194,7 @@ class ReTweet < ActiveRecord::Base
           if self.tweeter == "Cheezborger"
             $cheeseborger_twitter.retweet(self.tweet_id)
           else
-            $cheeseborger_twitter.update(self.retweet_text.to_str)
+            self.do_the_tweet
           end
           self.update_column(:did_retweet, true)
         end
