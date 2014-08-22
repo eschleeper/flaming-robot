@@ -16,7 +16,7 @@ class ReTweet < ActiveRecord::Base
     end
     random_number = rand(1..1000)
     if random_number < 200
-      thing_to_retweet = self.where(['created_at > ? AND did_retweet = ?', 2.hours.ago, false]).sample
+      thing_to_retweet = self.where(['created_at > ? AND did_retweet = ?', 4.hours.ago, false]).sample
       if random_number == 1
         retweet_text = "#{['What do you think', 'Hey','Hmm, I dont know'].sample}, @#{self.get_a_big_player}? #{question}"
       elsif random_number < 150 && thing_to_retweet
@@ -25,8 +25,8 @@ class ReTweet < ActiveRecord::Base
       else
         retweet_text = "#{phrase_for_schleep_bot}"
       end
-      #puts thing_to_retweet
-      $schleeper_twitter.update(twitter_limit(retweet_text).to_str)
+      puts retweet_text
+      #$schleeper_twitter.update(twitter_limit(retweet_text).to_str)
     end
   end
   
@@ -46,7 +46,7 @@ class ReTweet < ActiveRecord::Base
   def self.search_twitter
     
     
-    $twitter.search("#wheresmysushi OR #wheresmyburrito OR #wheresmyburger OR #wheresmycheeseburger OR #wheresmypizza OR #wheresmytaco OR #cheeseburger OR  #doublecheeseburger OR  #triplecheeseburger OR #frenchfries OR #cocacola -rt", :result_type => "recent").take(30).each do |tweet|
+    $twitter.search("#wheresmysushi OR #wheresmyburrito OR #wheresmyburger OR #wheresmycheeseburger OR #wheresmypizza OR #wheresmysandwich  OR #wheresmyfrenchfries OR #wheresmytaco OR #cheeseburger OR  #doublecheeseburger OR  #triplecheeseburger OR #frenchfries OR #cocacola OR #cheezborger -rt", :result_type => "recent").take(30).each do |tweet|
       
       tweet_as = ( tweet.text.downcase.include? "#wheresmy" ) ? 1 : 2
       if tweet_as == 1
@@ -109,8 +109,8 @@ class ReTweet < ActiveRecord::Base
   
     def self.phrase_for_schleep_bot
       [
-        "#{start_statement_2} #{verbing_for_schleep_bot} #{maybe_hashtag(adjective_for_schleep_bot)} #{maybe_hashtag(noun_for_schleep_bot(2).join())}s #{with_articles} #{maybe_hashtag(adjective_for_schleep_bot)} #{maybe_hashtag(noun_for_schleep_bot(1).first)}",
-        "#{start_statement} #{maybe_hashtag(noun_for_schleep_bot(1).first).titleize}s #{verbing_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(1).first)}s #{do_transition} #{maybe_hashtag(noun_for_schleep_bot(1).first)}'s #{verbing_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(1).first)}",
+        "#{start_statement_2} #{verbing_for_schleep_bot} #{maybe_hashtag(adjective_for_schleep_bot)} #{maybe_hashtag(noun_for_schleep_bot(2).join())}s, #{with_articles} #{maybe_hashtag(adjective_for_schleep_bot)} #{maybe_hashtag(noun_for_schleep_bot(1).first)}",
+        "#{start_statement} #{maybe_hashtag(noun_for_schleep_bot(1).first).titleize}s #{verbing_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(1).first)}s, #{do_transition} #{maybe_hashtag(noun_for_schleep_bot(1).first)}'s #{adjective_for_schleep_bot} #{with_articles} #{maybe_hashtag(noun_for_schleep_bot(1).first)}",
         question
       ].sample
     end
@@ -133,14 +133,14 @@ class ReTweet < ActiveRecord::Base
         "Right now there are",
         "Oh great... the",
         "All we need now is",
-        "So today the"
+        "So, today the"
       ].sample
     end
     
     def self.start_statement_2
       [
         "The most important part of the process is",
-        "My favorite part about being a programmer is",
+        "My favorite part about being a programmer, is",
         "I am stuck",
         "Today I am",
         "I can't stand",
@@ -284,15 +284,16 @@ class ReTweet < ActiveRecord::Base
     def self.message_choices(thing)
       messages = [
         self.make_retweet_text(thing),
-        "I got your #{thing} here: ",
-        "Ask and you shall receive "
+        "I got your ##{thing} here: ",
+        "Ask and you shall receive ",
+        "BOOM!! ##{thing.titleize}! "
       ].sample
     end
   
     def self.make_retweet_text(thing)
       case thing
       when "cheeseburger"
-        return "Cheese borger, cheese borger, cheese borger! "
+        return "Cheezborger, #cheezborger, cheezborger! "
       when "burger"
         return "Mmmm burgers... "
       when "burrito"
