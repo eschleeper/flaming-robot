@@ -69,13 +69,13 @@ class ReTweet < ActiveRecord::Base
     
     def do_the_tweet
       if self.tweet_as == 1
-        $twitter.update(self.retweet_text)
+        #$twitter.update(self.retweet_text)
       elsif self.tweet_as == 2
-        $cheeseborger_twitter.update(self.retweet_text)
+        #$cheeseborger_twitter.update(self.retweet_text)
       else
         #$schleeper_twitter.update(self.retweet_text)
       end
-      #puts "sending #{self.retweet_text}"
+      puts "sending #{self.retweet_text}"
     end
   
   private
@@ -237,6 +237,17 @@ class ReTweet < ActiveRecord::Base
       else
         return "I got your #{thing} here: "
       end
+    end
+    
+    def get_a_big_player
+      [
+        "dhh",
+        "addyosmani",
+        "paul_irish",
+        "meyerweb",
+        "chriscoyier",
+        "zeldman"
+      ]
     end
   
 end
