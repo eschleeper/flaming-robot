@@ -21,10 +21,11 @@ class ReTweet < ActiveRecord::Base
         retweet_text = "#{['What do you think', 'Hey','Hmm, I dont know'].sample}, @#{self.get_a_big_player}? #{question}"
       elsif random_number < 150 && thing_to_retweet
         retweet_text =  "#{phrase_for_schleep_bot} RT @#{thing_to_retweet.tweeter} #{thing_to_retweet.tweet_text}"
-        retweet_text.update_column(:did_retweet, true)
+        thing_to_retweet.update_column(:did_retweet, true)
       else
         retweet_text = "#{phrase_for_schleep_bot}"
       end
+      #puts thing_to_retweet
       $schleeper_twitter.update(twitter_limit(retweet_text).to_str)
     end
   end
