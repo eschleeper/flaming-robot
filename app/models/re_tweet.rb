@@ -3,6 +3,32 @@ class ReTweet < ActiveRecord::Base
   validates :tweet_id, uniqueness: true
   after_create :yo_me
   
+  def self.search_nerd_stuff
+    $schleeper_twitter.search("#nodejs OR #rubyonrails OR #backbonejs OR #jquery OR #postgres OR #nginx OR #bootstrap -rt", :result_type => "popular").take(40).each do |tweet|
+      self.create({
+        :tweet_id => tweet.id,
+        :tweeter => tweet.user.screen_name,
+        :tweet_text => tweet.text,
+        :did_retweet => false,
+        :tweet_as => 3
+      })
+      
+    end
+    random_number = rand(1..1000)
+    if random_number < 200
+      thing_to_retweet = self.where(['created_at > ? AND did_retweet = ?', 2.hours.ago, false]).sample
+      if random_number == 1
+        retweet_text = "#{['What do you think', 'Hey','Hmm, I dont know'].sample}, @#{self.get_a_big_player}? #{question}"
+      elsif random_number < 150 && thing_to_retweet
+        retweet_text =  "#{phrase_for_schleep_bot} RT @#{thing_to_retweet.tweeter} #{thing_to_retweet.tweet_text}"
+        retweet_text.update_column(:did_retweet, true)
+      else
+        retweet_text = "#{phrase_for_schleep_bot}"
+      end
+      $schleeper_twitter.update(twitter_limit(retweet_text).to_str)
+    end
+  end
+  
   def self.search_billy_goat
     $twitter.user_timeline("Cheezborger", {:include_rts => false}).each do |tweet|
       self.create({
@@ -82,17 +108,22 @@ class ReTweet < ActiveRecord::Base
   
     def self.phrase_for_schleep_bot
       [
-        "#{verbing_for_schleep_bot} #{maybe_hashtag(adjective_for_schleep_bot)} #{maybe_hashtag(noun_for_schleep_bot(2).join())}s",
-        "#{maybe_hashtag(noun_for_schleep_bot(2).join())}s #{verbing_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(2).join("s "))} #{verbing_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(1).first)}",
-        "#{start_question} #{verb_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(1).first)} #{maybe_hashtag(noun_for_schleep_bot(1).first)}s #{with_articles} #{maybe_hashtag(noun_for_schleep_bot(2).join())}?"
+        "#{verbing_for_schleep_bot.titleize} #{maybe_hashtag(adjective_for_schleep_bot)} #{maybe_hashtag(noun_for_schleep_bot(2).join())}s #{with_articles} #{maybe_hashtag(adjective_for_schleep_bot)} #{maybe_hashtag(noun_for_schleep_bot(1).first)}",
+        "#{maybe_hashtag(noun_for_schleep_bot(1).first).titleize}s #{verbing_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(2).join("s "))} #{verbing_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(1).first)}",
+        question
       ].sample
+    end
+    
+    def self.question
+      "#{start_question} #{verb_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(1).first)} #{maybe_hashtag(noun_for_schleep_bot(1).first)}s #{with_articles} #{maybe_hashtag(noun_for_schleep_bot(2).join())}?"
     end
     
     def self.start_question
       [
         "Anyone",
         "How do I",
-        "Can I"
+        "Can I",
+        "Should I"
       ].sample
     end
     
@@ -167,12 +198,16 @@ class ReTweet < ActiveRecord::Base
         "memcache",
         "mongo",
         "postgresql",
-        "postgres",
+        "coldfusion",
         "backbone",
         "router",
         "model",
         "web",
-        "view"
+        "view",
+        "nginx",
+        "java",
+        "dev",
+        "bootstrap"
       ].sample(count)
     end
     
@@ -188,7 +223,9 @@ class ReTweet < ActiveRecord::Base
     end
     
     def yo_me
-      #if self.tweet_as == 2
+      if self.tweet_as == 3
+        
+      else
         
         if !self.did_retweet
           if self.tweeter == "Cheezborger"
@@ -211,7 +248,7 @@ class ReTweet < ActiveRecord::Base
       #  request.set_form_data({"api_token" => ENV['yo_api_key'], "username" => ENV['yo_username'], "link" => "#{ENV['base_url']}#{Rails.application.routes.url_helpers.re_tweet_path(:id => self.id)}"})
       #  
       #  http.request(request)
-      #end
+      end
     end
     
     def self.message_choices(thing)
@@ -239,7 +276,7 @@ class ReTweet < ActiveRecord::Base
       end
     end
     
-    def get_a_big_player
+    def self.get_a_big_player
       [
         "dhh",
         "addyosmani",
@@ -247,7 +284,7 @@ class ReTweet < ActiveRecord::Base
         "meyerweb",
         "chriscoyier",
         "zeldman"
-      ]
+      ].sample
     end
   
 end

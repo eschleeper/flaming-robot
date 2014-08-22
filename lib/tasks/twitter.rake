@@ -1,13 +1,20 @@
 namespace :twitter do
+  
   desc "search twitter"
   task search: :environment do
     ReTweet.search_twitter
     ReTweet.search_billy_goat
   end
   
+  desc "search twitter nerd"
+  task search_nerd: :environment do
+    ReTweet.search_nerd_stuff
+  end
+  
+  
   desc "test cheeseborger"
-  task search_billy_goat: :environment do
-    ReTweet.search_billy_goat
+  task test_schleepbot: :environment do
+    puts ReTweet.phrase_for_schleep_bot
   end
   
   
