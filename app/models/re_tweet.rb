@@ -19,7 +19,7 @@ class ReTweet < ActiveRecord::Base
   def self.search_twitter
     
     
-    $twitter.search("#wheresmysushi OR #wheresmyburrito OR #wheresmyburger OR #wheresmycheeseburger OR #wheresmypizza OR #wheresmytaco OR #cheeseburger OR  #doublecheeseburger OR  #triplecheeseburger OR #frenchfries OR #cocacola -rt", :result_type => "recent").take(10).each do |tweet|
+    $twitter.search("#wheresmysushi OR #wheresmyburrito OR #wheresmyburger OR #wheresmycheeseburger OR #wheresmypizza OR #wheresmytaco OR #cheeseburger OR  #doublecheeseburger OR  #triplecheeseburger OR #frenchfries OR #cocacola -rt", :result_type => "recent").take(30).each do |tweet|
       
       tweet_as = ( tweet.text.include? "#wheresmy" ) ? 1 : 2
       if tweet_as == 1
@@ -30,9 +30,9 @@ class ReTweet < ActiveRecord::Base
           retweet_text = "Cheeseborger, cheeseborger, cheeseborger! RT @#{tweet.user.screen_name} #{tweet.text}"
         elsif tweet.text.downcase.include? "#doublecheeseburger"
           retweet_text = "Cheeseborger, cheeseborger! RT @#{tweet.user.screen_name} #{tweet.text}"
-        elsif tweet.text.downcase.include? "#coke"
+        elsif tweet.text.downcase.include? "#cocacola"
           retweet_text = "No Coke! Pepsi! RT @#{tweet.user.screen_name} #{tweet.text}"
-        elsif tweet.text.downcase.include? "#fries"
+        elsif tweet.text.downcase.include? "#frenchfries"
           retweet_text = "No fries! Chip! RT @#{tweet.user.screen_name} #{tweet.text}"
         else
           retweet_text = "Cheeseborger! RT @#{tweet.user.screen_name} #{tweet.text}"
@@ -68,6 +68,112 @@ class ReTweet < ActiveRecord::Base
   end
   
   private
+  
+    def self.phrase_for_schleep_bot
+      [
+        "#{verbing_for_schleep_bot} #{maybe_hashtag(adjective_for_schleep_bot)} #{maybe_hashtag(noun_for_schleep_bot(2).join())}s",
+        "#{maybe_hashtag(noun_for_schleep_bot(2).join())}s #{verbing_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(2).join("s "))} #{verbing_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(1).first)}",
+        "#{start_question} #{verb_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(1).first)} #{maybe_hashtag(noun_for_schleep_bot(1).first)}s #{with_articles} #{maybe_hashtag(noun_for_schleep_bot(2).join())}?"
+      ].sample
+    end
+    
+    def self.start_question
+      [
+        "Anyone",
+        "How do I",
+        "Can I"
+      ].sample
+    end
+    
+    def self.with_articles
+      ["in the",
+      "in a",
+      "for",
+      "with"].sample
+    end
+    
+    def self.adjective_for_schleep_bot
+      [
+        "enterprise level",
+        "modern",
+        "frontend",
+        "node",
+        "rails",
+        "html5",
+        "scalable",
+        "github",
+        "ninja",
+        "legacy",
+        "snappy",
+        "agile",
+        "blazing fast"
+      ].sample
+    end
+    
+    def self.verbing_for_schleep_bot
+      [
+        "deploying",
+        "scaling",
+        "compiling",
+        "developing",
+        "creating",
+        "controlling",
+        "scripting",
+        "mastering",
+        "caching"
+      ].sample
+    end
+    
+    def self.verb_for_schleep_bot
+      [
+        "run",
+        "scale",
+        "compile",
+        "code",
+        "design",
+        "develop",
+        "serve",
+        "make"
+      ].sample
+    end
+    
+    def self.noun_for_schleep_bot(count)
+      [
+        "heroku",
+        "cloud",
+        "gem",
+        "server",
+        "git",
+        "code",
+        "css",
+        "jquery",
+        "database",
+        "sql",
+        "cache",
+        "url",
+        "pushstate",
+        "storedproc",
+        "memcache",
+        "mongo",
+        "postgresql",
+        "postgres",
+        "backbone",
+        "router",
+        "model",
+        "web",
+        "view"
+      ].sample(count)
+    end
+    
+    def self.maybe_hashtag(words)
+      [
+        words,
+        words,
+        
+        
+        "##{words}"
+      ].sample
+    end
   
     def self.twitter_limit(tweet)
       return ActionController::Base.helpers.sanitize(tweet, :tags=>[]).truncate(140, :separator => " ").html_safe
