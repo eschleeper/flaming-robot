@@ -101,7 +101,7 @@ class ReTweet < ActiveRecord::Base
       #else
       #  $schleeper_twitter.update(self.retweet_text.to_str)
       end
-      puts "sending #{self.retweet_text}"
+      #puts "sending #{self.retweet_text}"
     end
   
   private
