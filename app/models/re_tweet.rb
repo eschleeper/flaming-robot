@@ -16,7 +16,7 @@ class ReTweet < ActiveRecord::Base
     end
     random_number = rand(1..1000)
     if random_number < 200
-      thing_to_retweet = self.where(['created_at > ? AND did_retweet = ?', 4.hours.ago, false]).sample
+      thing_to_retweet = self.where(['created_at > ? AND did_retweet = ?', 8.hours.ago, false]).sample
       if random_number == 1
         retweet_text = "#{['What do you think', 'Hey','Hmm, I dont know'].sample}, @#{self.get_a_big_player}? #{question}"
       elsif random_number < 150 && thing_to_retweet
@@ -25,8 +25,8 @@ class ReTweet < ActiveRecord::Base
       else
         retweet_text = "#{phrase_for_schleep_bot}"
       end
-      puts retweet_text
-      #$schleeper_twitter.update(twitter_limit(retweet_text).to_str)
+      #puts retweet_text
+      $schleeper_twitter.update(twitter_limit(retweet_text).to_str)
     end
   end
   
