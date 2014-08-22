@@ -110,7 +110,7 @@ class ReTweet < ActiveRecord::Base
     def self.phrase_for_schleep_bot
       [
         "#{start_statement_2} #{verbing_for_schleep_bot} #{maybe_hashtag(adjective_for_schleep_bot)} #{maybe_hashtag(noun_for_schleep_bot(2).join())}s, #{with_articles} #{maybe_hashtag(adjective_for_schleep_bot)} #{maybe_hashtag(noun_for_schleep_bot(1).first)}",
-        "#{start_statement} #{maybe_hashtag(noun_for_schleep_bot(1).first).titleize}s #{verbing_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(1).first)}s, #{do_transition} #{maybe_hashtag(noun_for_schleep_bot(1).first)}'s #{adjective_for_schleep_bot} #{with_articles} #{maybe_hashtag(noun_for_schleep_bot(1).first)}",
+        "#{start_statement} #{maybe_hashtag(noun_for_schleep_bot(1).first).titleize}s #{verbing_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(1).first)}s, is #{do_transition} #{maybe_hashtag(noun_for_schleep_bot(1).first)}'s #{adjective_for_schleep_bot} #{with_articles} #{maybe_hashtag(noun_for_schleep_bot(1).first)}",
         question
       ].sample
     end
@@ -178,7 +178,8 @@ class ReTweet < ActiveRecord::Base
         "legacy",
         "snappy",
         "agile",
-        "blazing fast"
+        "blazing fast",
+        "responsive"
       ].sample
     end
     
@@ -237,7 +238,8 @@ class ReTweet < ActiveRecord::Base
         "nginx",
         "java",
         "dev",
-        "bootstrap"
+        "bootstrap",
+        "workflow"
       ].sample(count)
     end
     
