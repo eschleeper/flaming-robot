@@ -69,11 +69,11 @@ class ReTweet < ActiveRecord::Base
     
     def do_the_tweet
       if self.tweet_as == 1
-        $twitter.update(self.retweet_text)
+        $twitter.update(self.retweet_text.to_str)
       elsif self.tweet_as == 2
-        $cheeseborger_twitter.update(self.retweet_text)
+        $cheeseborger_twitter.update(self.retweet_text.to_str)
       #else
-      #  $schleeper_twitter.update(self.retweet_text)
+      #  $schleeper_twitter.update(self.retweet_text.to_str)
       end
       puts "sending #{self.retweet_text}"
     end
