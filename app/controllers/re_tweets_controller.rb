@@ -4,7 +4,7 @@ class ReTweetsController < ApplicationController
   # GET /re_tweets
   # GET /re_tweets.json
   def index
-    @re_tweets = ReTweet.paginate(:page => params[:page], :per_page => 30).order('created_at DESC')
+    @re_tweets = ReTweet.paginate(:page => params[:page], :per_page => 30).order('created_at DESC').where(:tweet_as => params[:tweet_as])
   end
 
   # GET /re_tweets/1
