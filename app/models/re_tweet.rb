@@ -19,7 +19,7 @@ class ReTweet < ActiveRecord::Base
   def self.search_twitter
     
     
-    $twitter.search("#wheresmysushi OR #wheresmyburrito OR #wheresmyburger OR #wheresmycheeseburger OR #wheresmypizza OR #wheresmytaco OR #cheeseburger OR  #doublecheeseburger OR  #triplecheeseburger OR #fries OR #coke -rt", :result_type => "recent").take(10).each do |tweet|
+    $twitter.search("#wheresmysushi OR #wheresmyburrito OR #wheresmyburger OR #wheresmycheeseburger OR #wheresmypizza OR #wheresmytaco OR #cheeseburger OR  #doublecheeseburger OR  #triplecheeseburger OR #frenchfries OR #cocacola -rt", :result_type => "recent").take(10).each do |tweet|
       
       tweet_as = ( tweet.text.include? "#wheresmy" ) ? 1 : 2
       if tweet_as == 1
