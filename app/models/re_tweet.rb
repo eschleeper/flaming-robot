@@ -109,8 +109,8 @@ class ReTweet < ActiveRecord::Base
   
     def self.phrase_for_schleep_bot
       [
-        "#{verbing_for_schleep_bot.titleize} #{maybe_hashtag(adjective_for_schleep_bot)} #{maybe_hashtag(noun_for_schleep_bot(2).join())}s #{with_articles} #{maybe_hashtag(adjective_for_schleep_bot)} #{maybe_hashtag(noun_for_schleep_bot(1).first)}",
-        "#{maybe_hashtag(noun_for_schleep_bot(1).first).titleize}s #{verbing_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(2).join("s "))} #{verbing_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(1).first)}",
+        "#{start_statement_2} #{verbing_for_schleep_bot} #{maybe_hashtag(adjective_for_schleep_bot)} #{maybe_hashtag(noun_for_schleep_bot(2).join())}s #{with_articles} #{maybe_hashtag(adjective_for_schleep_bot)} #{maybe_hashtag(noun_for_schleep_bot(1).first)}",
+        "#{start_statement} #{maybe_hashtag(noun_for_schleep_bot(1).first).titleize}s #{verbing_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(1).first)}s #{do_transition} #{maybe_hashtag(noun_for_schleep_bot(1).first)}'s #{verbing_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(1).first)}",
         question
       ].sample
     end
@@ -125,6 +125,35 @@ class ReTweet < ActiveRecord::Base
         "How do I",
         "Can I",
         "Should I"
+      ].sample
+    end
+    
+    def self.start_statement
+      [
+        "Right now there are",
+        "Oh great... the",
+        "All we need now is",
+        "So today the"
+      ].sample
+    end
+    
+    def self.start_statement_2
+      [
+        "The most important part of the process is",
+        "My favorite part about being a programmer is",
+        "I am stuck",
+        "Today I am",
+        "I can't stand",
+        "UGGG!!"
+      ].sample
+    end
+    
+    def self.do_transition
+      [
+        "in the",
+        "while a",
+        "and",
+        "so"
       ].sample
     end
     
