@@ -4,7 +4,7 @@ class ReTweet < ActiveRecord::Base
   after_create :yo_me
   
   def self.search_nerd_stuff
-    $schleeper_twitter.search("#nodejs OR #rubyonrails OR #backbonejs OR #jquery OR #postgres OR #nginx OR #bootstrap -rt", :result_type => "popular").take(100).each do |tweet|
+    $schleeper_twitter.search("#memcache OR #emberjs OR #angularjs OR #j2ee OR #xcode OR #nodejs OR #heroku OR #css3 OR #html5 OR #nodejs OR #rubyonrails OR #backbonejs OR #jquery OR #postgres OR #nginx OR #bootstrap -rt", :result_type => "popular").take(100).each do |tweet|
       self.create({
         :tweet_id => tweet.id,
         :tweeter => tweet.user.screen_name,
@@ -109,7 +109,7 @@ class ReTweet < ActiveRecord::Base
   
     def self.phrase_for_schleep_bot
       [
-        "#{start_statement_3} #{noun_for_schleep_bot(2).join()} the #{adjective_for_schleep_bot} #{noun_for_schleep_bot(1).first}. ##{noun_for_schleep_bot(4).join(' #')}",
+        "#{start_statement_3} #{noun_for_schleep_bot(2).join()} the #{adjective_for_schleep_bot}, #{adjective_for_schleep_bot} #{noun_for_schleep_bot(1).first}. ##{noun_for_schleep_bot(4).join(' #')}",
         "#{start_statement_2} #{verbing_for_schleep_bot} #{maybe_hashtag(adjective_for_schleep_bot)} #{maybe_hashtag(noun_for_schleep_bot(2).join())}s, #{with_articles} #{maybe_hashtag(adjective_for_schleep_bot)} #{maybe_hashtag(noun_for_schleep_bot(1).first)}",
         "#{start_statement} #{maybe_hashtag(noun_for_schleep_bot(1).first)}s #{verbing_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(1).first)}s, #{do_transition} #{adjective_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(1).first)}s #{verbing_for_schleep_bot} #{with_articles} #{maybe_hashtag(noun_for_schleep_bot(1).first)}",
         question
@@ -187,7 +187,13 @@ class ReTweet < ActiveRecord::Base
         "agile",
         "blazing fast",
         "responsive",
-        "MVC"
+        "MVC",
+        "xcode",
+        "compiled",
+        "cross-platform",
+        "ajax",
+        "ios",
+        "android"
       ].sample
     end
     
@@ -201,7 +207,9 @@ class ReTweet < ActiveRecord::Base
         "controlling",
         "scripting",
         "mastering",
-        "caching"
+        "caching",
+        "innovating",
+        "managing"
       ].sample
     end
     
@@ -251,10 +259,10 @@ class ReTweet < ActiveRecord::Base
         "framework",
         "apache",
         "proxy",
-        "ios",
-        "android",
         "cordova",
-        "xcode"
+        "module",
+        "angularjs",
+        "emberjs"
       ].sample(count)
     end
     
