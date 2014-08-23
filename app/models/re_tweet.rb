@@ -130,21 +130,18 @@ class ReTweet < ActiveRecord::Base
     
     def self.start_statement
       [
-        "Right now there are",
-        "Oh great... the",
-        "All we need now is",
+        "Right now, the trend is",
+        "The future is",
         "So, today the"
       ].sample
     end
     
     def self.start_statement_2
       [
-        "The most important part of the process is",
+        "The most important part of the process, is",
         "My favorite part about being a programmer, is",
         "I am stuck",
-        "Today I am",
-        "I can't stand",
-        "UGGG!!"
+        "Today I am"
       ].sample
     end
     
@@ -239,7 +236,8 @@ class ReTweet < ActiveRecord::Base
         "java",
         "dev",
         "bootstrap",
-        "workflow"
+        "workflow",
+        "framework"
       ].sample(count)
     end
     
