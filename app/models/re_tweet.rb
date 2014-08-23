@@ -15,11 +15,11 @@ class ReTweet < ActiveRecord::Base
       
     end
     random_number = rand(1..1000)
-    if random_number < 200
+    if random_number < 1050
       thing_to_retweet = self.where(['created_at > ? AND did_retweet = ?', 8.hours.ago, false]).sample
       if random_number == 1
         retweet_text = "#{['What do you think', 'Hey','Hmm, I dont know'].sample}, @#{self.get_a_big_player}? #{question}"
-      elsif random_number < 150 && thing_to_retweet
+      elsif thing_to_retweet
         retweet_text =  "#{phrase_for_schleep_bot} RT @#{thing_to_retweet.tweeter} #{thing_to_retweet.tweet_text}"
         thing_to_retweet.update_column(:did_retweet, true)
       else
@@ -109,14 +109,24 @@ class ReTweet < ActiveRecord::Base
   
     def self.phrase_for_schleep_bot
       [
+        "#{start_statement_3} #{noun_for_schleep_bot(2).join()} the #{adjective_for_schleep_bot} #{noun_for_schleep_bot(1).first}. ##{noun_for_schleep_bot(4).join(' #')}",
         "#{start_statement_2} #{verbing_for_schleep_bot} #{maybe_hashtag(adjective_for_schleep_bot)} #{maybe_hashtag(noun_for_schleep_bot(2).join())}s, #{with_articles} #{maybe_hashtag(adjective_for_schleep_bot)} #{maybe_hashtag(noun_for_schleep_bot(1).first)}",
-        "#{start_statement} #{maybe_hashtag(noun_for_schleep_bot(1).first).titleize}s #{verbing_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(1).first)}s, is #{do_transition} #{maybe_hashtag(noun_for_schleep_bot(1).first)}'s #{adjective_for_schleep_bot} #{with_articles} #{maybe_hashtag(noun_for_schleep_bot(1).first)}",
+        "#{start_statement} #{maybe_hashtag(noun_for_schleep_bot(1).first)}s #{verbing_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(1).first)}s, #{do_transition} #{adjective_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(1).first)}s #{verbing_for_schleep_bot} #{with_articles} #{maybe_hashtag(noun_for_schleep_bot(1).first)}",
         question
       ].sample
     end
     
     def self.question
-      "#{start_question} #{verb_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(1).first)} #{maybe_hashtag(noun_for_schleep_bot(1).first)}s #{with_articles} #{maybe_hashtag(noun_for_schleep_bot(2).join())}?"
+      "#{start_question} #{verb_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(1).first)} #{maybe_hashtag(noun_for_schleep_bot(1).first)}s #{with_articles} #{maybe_hashtag(noun_for_schleep_bot(2).join())}? ##{noun_for_schleep_bot(3).join(' #')}"
+    end
+    
+    def self.start_statement_3
+      [
+        "Remember to always",
+        "I like to make sure I",
+        "It's best to",
+        "First step:"
+      ].sample
     end
     
     def self.start_question
@@ -176,7 +186,8 @@ class ReTweet < ActiveRecord::Base
         "snappy",
         "agile",
         "blazing fast",
-        "responsive"
+        "responsive",
+        "MVC"
       ].sample
     end
     
@@ -215,7 +226,7 @@ class ReTweet < ActiveRecord::Base
         "server",
         "git",
         "code",
-        "css",
+        "css3",
         "jquery",
         "database",
         "sql",
@@ -237,7 +248,13 @@ class ReTweet < ActiveRecord::Base
         "dev",
         "bootstrap",
         "workflow",
-        "framework"
+        "framework",
+        "apache",
+        "proxy",
+        "ios",
+        "android",
+        "cordova",
+        "xcode"
       ].sample(count)
     end
     
