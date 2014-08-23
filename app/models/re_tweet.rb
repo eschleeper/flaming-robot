@@ -15,7 +15,7 @@ class ReTweet < ActiveRecord::Base
       
     end
     random_number = rand(1..1000)
-    if random_number < 1050
+    if random_number < 120
       thing_to_retweet = self.where(['created_at > ? AND did_retweet = ?', 8.hours.ago, false]).sample
       if random_number == 1
         retweet_text = "#{['What do you think', 'Hey','Hmm, I dont know'].sample}, @#{self.get_a_big_player}? #{question}"
