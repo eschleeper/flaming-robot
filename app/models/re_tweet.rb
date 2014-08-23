@@ -111,7 +111,7 @@ class ReTweet < ActiveRecord::Base
       [
         "#{start_statement_3} #{noun_for_schleep_bot(2).join()} the #{adjective_for_schleep_bot}, #{adjective_for_schleep_bot} #{noun_for_schleep_bot(1).first}. ##{noun_for_schleep_bot(4).join(' #')}",
         "#{start_statement_2} #{verbing_for_schleep_bot} #{maybe_hashtag(adjective_for_schleep_bot)} #{maybe_hashtag(noun_for_schleep_bot(2).join())}s, #{with_articles} #{maybe_hashtag(adjective_for_schleep_bot)} #{maybe_hashtag(noun_for_schleep_bot(1).first)}",
-        "#{start_statement} #{maybe_hashtag(noun_for_schleep_bot(1).first)}s #{verbing_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(1).first)}s, #{do_transition} #{adjective_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(1).first)}s #{verbing_for_schleep_bot} #{with_articles} #{maybe_hashtag(noun_for_schleep_bot(1).first)}",
+        "#{start_statement} #{maybe_hashtag(noun_for_schleep_bot(1).first)}s #{verbing_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(1).first)}s, #{do_transition} #{adjective_for_schleep_bot} #{maybe_hashtag(noun_for_schleep_bot(1).first)}s #{verbed_for_schleep_bot} #{with_articles} #{maybe_hashtag(noun_for_schleep_bot(1).first)}",
         question
       ].sample
     end
@@ -210,6 +210,22 @@ class ReTweet < ActiveRecord::Base
         "caching",
         "innovating",
         "managing"
+      ].sample
+    end
+    
+    def self.verbed_for_schleep_bot
+      [
+        "deployed",
+        "scaled",
+        "compiled",
+        "developed",
+        "created",
+        "controlled",
+        "scripted",
+        "mastered",
+        "cached",
+        "innovated",
+        "managed"
       ].sample
     end
     
