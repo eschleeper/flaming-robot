@@ -4,7 +4,7 @@ class ReTweet < ActiveRecord::Base
   after_create :yo_me
   
   def self.search_nerd_stuff
-    $schleeper_twitter.search("#nodejs OR #rubyonrails OR #backbonejs OR #jquery OR #postgres OR #nginx OR #bootstrap -rt", :result_type => "popular").take(40).each do |tweet|
+    $schleeper_twitter.search("#nodejs OR #rubyonrails OR #backbonejs OR #jquery OR #postgres OR #nginx OR #bootstrap -rt", :result_type => "popular").take(100).each do |tweet|
       self.create({
         :tweet_id => tweet.id,
         :tweeter => tweet.user.screen_name,
