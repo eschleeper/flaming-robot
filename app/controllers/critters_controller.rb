@@ -5,7 +5,8 @@ class CrittersController < ApplicationController
   # GET /critters
   # GET /critters.json
   def index
-    @critters = type_class.all
+    #@critters = type_class.all
+    @critters = type_class.paginate(:page => params[:page], :per_page => 30).order('name ASC')
   end
 
   # GET /critters/1

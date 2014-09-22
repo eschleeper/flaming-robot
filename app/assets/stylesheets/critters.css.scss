@@ -4,6 +4,12 @@
 
 #wiki_image_pages-list {
   width:100%;
+  li {
+    list-style: none inside;
+    > div {
+      margin: 0;
+    }
+  }
   li.saving {
     background:#ccc;
   }

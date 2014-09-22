@@ -19,11 +19,13 @@
         <div class="six mobile-three columns">
           <%= f.text_field :name %>
         </div>
-        <div class="three mobile-three columns">
-          <label for="radio_bird"><input name="type" type="radio" id="radio_bird">Bird</label>
-          <label for="radio_bug"><input name="type" type="radio" id="radio_bug">Bug</label>
-          <label for="radio_herp"><input name="type" type="radio" id="radio_herp">Reptiles and Amphibians</label>
-        </div>
+        <% unless @type %>
+          <div class="three mobile-three columns">
+            <label for="radio_bird"><input name="type" type="radio" id="radio_bird">Bird</label>
+            <label for="radio_bug"><input name="type" type="radio" id="radio_bug">Bug</label>
+            <label for="radio_herp"><input name="type" type="radio" id="radio_herp">Reptiles and Amphibians</label>
+          </div>
+        <% end %>
         <div class="three mobile-one columns">
           <%= f.submit 'Save', :class => 'button expand postfix' %>
         </div>

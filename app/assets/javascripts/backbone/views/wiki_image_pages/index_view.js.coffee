@@ -3,7 +3,8 @@ FieldGuide.Views.WikiImagePages ||= {}
 class FieldGuide.Views.WikiImagePages.IndexView extends Backbone.View
   template: JST["backbone/templates/wiki_image_pages/index"]
 
-  initialize: () ->
+  initialize: (opts) ->
+    @critter = opts.critter
     @render()
     @collection.bind('reset', @addAll)
 
@@ -20,6 +21,7 @@ class FieldGuide.Views.WikiImagePages.IndexView extends Backbone.View
     @$("#wiki_image_pages-list").append(new FieldGuide.Views.WikiImagePages.NewView({model : wikiImagePage}).el)
 
   render: =>
-    $(@el).html(@template(wikiImagePages: @collection.toJSON() ))
+    search_term = @critter.name.charAt(0).toUpperCase() + @critter.name.slice(1).toLowerCase().replace(/\s+/g, '_')
+    $(@el).html(@template(wikiImagePages: @collection.toJSON(), search_term: search_term ))
 
     return this

@@ -1,4 +1,4 @@
-<h1>Editing critter</h1>
+<h1>Editing <%= @type ? @type : "Critter"%></h1>
 
 <%= render 'form' %>
 
@@ -9,7 +9,7 @@
   $(function() {
     
     var images = new FieldGuide.Collections.WikiImagePagesCollection([], { id: <%= @critter.id %> });
-    var imagesView = new FieldGuide.Views.WikiImagePages.IndexView({el:"#wikiepedia_search_form", collection: images});
+    var imagesView = new FieldGuide.Views.WikiImagePages.IndexView({el:"#wikiepedia_search_form", collection: images, critter: <%= @critter.to_json.html_safe %>});
     window.router = new FieldGuide.Routers.WikiImagePagesRouter({wikiImagePages:images});
     Backbone.history.start();
     
