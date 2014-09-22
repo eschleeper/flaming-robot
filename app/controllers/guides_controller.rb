@@ -4,7 +4,7 @@ class GuidesController < ApplicationController
   # GET /guides
   # GET /guides.json
   def index
-    @guides = Guide.all
+    @guides = Guide.paginate(:page => params[:page], :per_page => 30)
   end
 
   # GET /guides/1

@@ -35,6 +35,12 @@ header {
   width:auto;
 }
 
+.guide-list {
+  margin: 0 10px;
+  li {
+    list-style:none inside;
+  }
+}
 
 
 /* Magnific Popup CSS */

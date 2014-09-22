@@ -12,17 +12,16 @@
   <tbody>
     <% @guides.each do |guide| %>
       <tr>
-        <td><%= guide.name %>
-          <ul>
-            <% for section in guide.sections %>
-              <li><%= section.name %></li>
-                <ul>
-                  <% for critter in section.critters %>
-                    <li><%= critter.name %></li>
-                  <% end %>
-                </ul>
-            <% end %>
-          </ul>
+        <td>
+          <h4><%= guide.name %></h4>
+          <% for section in guide.sections %>
+            <h5><%= section.name %></h5>
+            <ul class="guide-list">
+                <% for critter in section.critters %>
+                  <li><%= critter.name %></li>
+                <% end %>
+            </ul>
+          <% end %>
         </td>
         <td><%= guide.explorer_id %></td>
         <td><%= link_to 'Show', guide %></td>
@@ -34,5 +33,5 @@
 </table>
 
 <br>
-
+<%= will_paginate @guides %>
 <%= link_to 'New Guide', new_guide_path %>
