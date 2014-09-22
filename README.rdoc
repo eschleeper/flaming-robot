@@ -1,28 +1,22 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Steps to get the field guide running in your local:
 
-Things you may want to cover:
+You should use Ruby 2.0 and Rails 4.1.4
+The rvmrc file is expecting this gemset:
 
-* Ruby version
+ruby-2.0.0-p481@field_guide
 
-* System dependencies
+Once the repo is cloned, run bundle install to get all dependencies
 
-* Configuration
+The app uses postgresql, the database.yml includes a config for using a database named field_guide for the user Eric_MBP
+please change these settings as needed.
 
-* Database creation
+Once that has been done, you should be able to run rake db:migrate to get the schema set up
 
-* Database initialization
+To make use of Amazon S3, create a file at:
+config/initializers/carrierwave.rb
 
-* How to run the test suite
+and follow the instructions here:
+https://github.com/carrierwaveuploader/carrierwave
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
