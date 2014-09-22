@@ -42,7 +42,7 @@ class FieldGuide.Views.GuideItems.NewView extends Backbone.View
       source: "/critters/search",
       select: ( event, ui ) ->
         $(this).parents("form").find(".ui-autocomplete-results").html(
-          "<h3>" + ui.item.name + "</h3>"
+          "<h3>" + ui.item.name + "</h3><input type='submit' value='Add Critter' class='button expand postfix' />"
           $(this).parents("form").find(".critter_id").val(ui.item.id).trigger "change"
         )
     this.$(".search_critter").data('ui-autocomplete')._renderItem = (ul, item) ->
