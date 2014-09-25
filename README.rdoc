@@ -1,28 +1,80 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Steps to get the field guide running in your local:
 
-Things you may want to cover:
+You should use Ruby 2.0 and Rails 4.1.4
+The rvmrc file is expecting this gemset:
 
-* Ruby version
+ruby-2.0.0-p481@field_guide
 
-* System dependencies
+Once the repo is cloned, run bundle install to get all dependencies
 
-* Configuration
+The app uses postgresql, the database.yml includes a config for using a database named field_guide for the user Eric_MBP
+please change these settings as needed.
 
-* Database creation
+Once that has been done, you should be able to run rake db:migrate to get the schema set up
 
-* Database initialization
+To make use of Amazon S3, create a file at:
+config/initializers/carrierwave.rb
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+and follow the instructions here:
+https://github.com/carrierwaveuploader/carrierwave
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+
+How to use the App:
+
+The app's purpose is to allow users to create wildlife field guides.
+
+A guide can contain many sections, and different critters can be added into sections. The images used in the site, are mainly Creative Commons attribution licensed, sourced from Wikipedia. In the admin, there is a tool for easily adding new images to critter (once you know the trick :D). This is the page for the guide:
+
+guides/:id
+
+This UI uses backbonejs and Rails services to add/edit/remove sections, and also add/remove different critters from the section without needing to reload the entire page.
+
+To add new critters to the section, click the "Add to ____" link, and a modal opens where you type in the name of the critters you want to add, there is an autocompleter that pulls in critters from the database as you search. You can only add critters that are already in the database.
+
+To add a new critter (bird) you go to this url:
+
+birds/new
+
+Enter in the name of the bird you want to add, I recommend adding a critter exactly how the name appears on the wikipedia site. Once you save the image, you are taken to a new UI where you can attach images to the critter (See the attached screenshot).
+
+For this part of app to work correctly, you must search using the exact same url path, that wikipedia uses. For instance, if you want to add a Cardinal, from this page on wikipedia:
+
+http://en.wikipedia.org/wiki/Cardinal_(bird)
+
+You must search for "Cardinal_(bird)"
+
+Once you see results, if the page in wikipedia includes the icon "Use this file on the web" that means you can use the image with Attribution, (for profit even!). Just click the icon, and copy paste the file URL, and the Attribution (See other screenshot).
+
+When you click "Save Image" the page makes a call to a Rails service. The Rails Service uses Carrierwave to upload the image, in several different sizes to an Amazon S3 bucket.
+
+
+Other important urls:
+
+Show all guides:
+guides
+
+Create new guide:
+guides/new
+
+New bird:
+birds/new
+List birds:
+birds
+
+New Bug:
+bugs/new
+List Bugs:
+bugs
+
+New Reptile or Amphibian:
+herps/new
+List Reptiles and Amphibians:
+herps
+
+New Mammals:
+mammals/new
+List mammals:
+mammals
