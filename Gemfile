@@ -52,6 +52,8 @@ gem 'wkhtmltopdf-binary'
 
 gem 'twitter'
 gem 'oauth'
+
+gem 'brototype', '~> 0.9.1'
 #gem 'omniauth-twitter'
 
 # Use ActiveModel has_secure_password

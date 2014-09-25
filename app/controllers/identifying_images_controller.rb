@@ -3,13 +3,11 @@ class IdentifyingImagesController < ApplicationController
   
   def index
     if params[:wikipedia_name]
-      #raise "http://en.wikipedia.org/w/api.php?format=json&action=query&titles=#{params[:wikipedia_name]}&prop=images".inspect
-      critter_data = JSON.load(open(URI.encode("http://en.wikipedia.org/w/api.php?format=json&action=query&titles=#{params[:wikipedia_name]}&prop=images")))
-      #raise critter_data.inspect
-      render json: critter_data["query"]["pages"].values[0]["images"]
+      critter_data = Brototype::Bro.new(JSON.load(open(URI.encode("http://en.wikipedia.org/w/api.php?format=json&action=query&titles=#{params[:wikipedia_name]}&prop=images"))))
+      critter_data.i_dont_always("query.pages").but_when_i_do(lambda { |page|
+        render json: Brototype::Bro.new(page.values[0]).i_can_haz("images")
+      })
     end
-    #@critter
-    #@critter = type_class.create_from_wikipedia(params[:wikipedia_name],{:type => type, :name => params[:wikipedia_name]})
   end
   
   def create
@@ -39,7 +37,6 @@ class IdentifyingImagesController < ApplicationController
   
     # Never trust parameters from the scary internet, only allow the white list through.
     def identifying_image_params
-      #raise params.inspect
       params.require(:critter_identifying_images).permit(:image,:remote_image_url,:critter_id,:attribution)
     end
   
